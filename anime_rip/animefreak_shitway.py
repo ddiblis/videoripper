@@ -44,9 +44,10 @@ class Pages(WebPage):
     @property
     def get_links(self):
         if self._link_list is None:
+            soup = self.soup
             self._link_list = [
                 link["href"]
-                for link in self.soup("div", class_="tnContent")[1]("a")[::-1]
+                for link in soup("div", class_="tnContent")[1]("a")[::-1]
             ]
         return self._link_list
 
