@@ -1,0 +1,27 @@
+[tool.poetry]
+name = "video_ripper"
+version = "0.1.0"
+description = "rips videos from select websites"
+authors = ["wafiq"]
+packages = [{ include = "anime_rip" }]
+
+[tool.poetry.dependencies]
+python = "^3.7"
+requests = "^2.23.0"
+bs4 = "^0.0.1"
+youtube_dl = "^2020.6.16"
+click = "^7.1.2"
+
+[tool.poetry.dev-dependencies]
+commitizen = "^1.23.0"
+
+[tool.poetry.scripts]
+videoripper = 'anime_rip.cli:cli'
+
+[tool.commitizen]
+name = "cz_conventional_commits"
+version = "0.0.1"
+tag_format = "$version"
+[build-system]
+requires = ["poetry>=0.12"]
+build-backend = "poetry.masonry.api"
