@@ -20,7 +20,10 @@ videoripper = 'anime_rip.cli:cli'
 
 [tool.commitizen]
 name = "cz_conventional_commits"
-version = "0.0.1"
+version = "0.1.0"
+version_files = [
+    "pyproject.toml"
+]
 tag_format = "$version"
 [build-system]
 requires = ["poetry>=0.12"]
