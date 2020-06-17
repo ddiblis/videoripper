@@ -30,7 +30,6 @@ class Pages(WebPage):
     def __init__(self, name):
         self.name = name
         self._link_list = None
-        super().__init__(self.url)
 
     @property
     def info(self):

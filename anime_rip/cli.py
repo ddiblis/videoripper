@@ -7,10 +7,10 @@ def cli():
 
 @cli.command(help= "download a full series") 
 
-@cli.option("--site", default=None)
+@click.option("--site", default=None)
 
 @click.argument("name") 
-def dlseries(name, site):
+def series(name, site):
    if site is not None:
       for pages_class in Pages.__subclasses__():
          if site in pages_class.tags:
@@ -26,9 +26,10 @@ def website(sitename):
    w = sitename
    w.downloadlinks()
 
-@cli.command("list")
-def websitelist():
+@cli.command(help="list of accepted websites")
+def sitelist():
    print("Sitename: Tags")
+   print("============")
    for pages_class in Pages.__subclasses__():
       print("{}: {}".format(*pages_class.tags))
 

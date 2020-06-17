@@ -14,7 +14,8 @@ class Pages(base.Pages):
 
     def __init__(self, name):
         self.name = name
-        self.url = parse.urljoin(self.base_url, f"watch/{name}")
+        url = parse.urljoin(self.base_url, f"watch/{name}")
+        super().__init__(url)
 
     @property
     def info(self):
