@@ -1,22 +1,31 @@
-# wafiq's comment
 import re
+from . import base
 from urllib import parse
 
-from . import base
+import requests
+import youtube_dl
+from bs4 import BeautifulSoup as BS
 
 
-websitename = "https://www.animefreak.tv/"
 
-class Episodes(base.Episodes):
-    base_url = "https://www.animefreak.tv/{}"
-    tags = ["animefreak", "af"]
+class Pages(base.Pages):
+    base_url = "https://www.animefreak.tv"
+    tags = ["animefreak", "AF"]
 
-    def enumerate_episodes(self):
-        episodes = self.soup.select(".check-list a")
-        return [
-            parse.urljoin(websitename, episode.attrs["href"])
-            for episode in episodes
-        ]
+    def __init__(self, name):
+        self.name = name
+        self.url = parse.urljoin(self.base_url, f"watch/{name}")
 
-    def generate_episode(self, url):
-        return Episode(url)
+    @property
+    def info(self):
+        return re.search(r".tv/watch/(?P<series>[^/]*)", self.url)
+
+    @property
+    def get_links(self):
+        if self._link_list is None:
+            soup = self.soup
+            self._link_list = [
+                link["href"]
+                for link in soup("div", class_="tnContent")[1]("a")[::-1]
+            ]
+        return self._link_list

@@ -1,24 +1,23 @@
-# wafiq's comment
-import os
 import re
 from urllib import parse
 
 import requests
+import youtube_dl
 from bs4 import BeautifulSoup as BS
 
 
-
+# If a link hasn't been requested, request one and grab html
 class WebPage:
     def __init__(self, url):
-        self._resp = None
+        self._response = None
         self._soup = None
         self.url = url
 
     @property
     def resp(self):
-        if self._resp is None:
-            self._resp = requests.get(self.url)
-        return self._resp
+        if self._response is None:
+            self._response = requests.get(self.url)
+        return self._response
 
     @property
     def soup(self):
@@ -27,26 +26,21 @@ class WebPage:
         return self._soup
 
 
-class Episodes(WebPage):
-    base_url = ""
-
+class Pages(WebPage):
     def __init__(self, name):
-        self._episode_list = None
-        self.name = name.replace("-", " ")
-        super().__init__(self.base_url.format(name))
+        self.name = name
+        self._link_list = None
+        super().__init__(self.url)
 
-    @abstractmethod
-    def enumerate_episodes(self):
+    @property
+    def info(self):
         pass
 
     @property
-    def episode_list(self):
-        if self._episode_list is None:
-            self._episode_list = self.enumerate_episodes()
-        return self._episode_list
-
-    def generate_episode(self, url):
+    def get_links(self):
         pass
 
-    def episodes(self):
-        return [self.generate_episode(ep) for ep in self.episode_list]
+    def downloadlinks(self):
+        ydl_opts = {}
+        with youtube_dl.YoutubeDL(ydl_opts) as ydl:
+            ydl.download(self.get_links)
