@@ -27,9 +27,10 @@ class WebPage:
 
 
 class Pages(WebPage):
-    def __init__(self, name):
+    def __init__(self, name, url):
         self.name = name
         self._link_list = None
+        super().__init__(url)
 
     @property
     def info(self):
