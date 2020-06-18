@@ -1,12 +1,14 @@
 import re
-from . import base
 from urllib import parse
 
 import requests
 import youtube_dl
 from bs4 import BeautifulSoup as BS
 
+from . import base
 
+
+webitename = "https://www.animefreak.tv"
 
 class Pages(base.Pages):
     base_url = "https://www.animefreak.tv"
@@ -14,8 +16,7 @@ class Pages(base.Pages):
 
     def __init__(self, name):
         self.name = name
-        url = parse.urljoin(self.base_url, f"watch/{name}")
-        super().__init__(url)
+        url = parse.urljoin(websitename, f"watch/{name}")
 
     @property
     def info(self):
