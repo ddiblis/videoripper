@@ -8,16 +8,14 @@ from bs4 import BeautifulSoup as BS
 from . import base
 
 
-webitename = "https://www.animefreak.tv"
-
 class Pages(base.Pages):
     base_url = "https://www.animefreak.tv"
     tags = ["animefreak", "AF"]
 
     def __init__(self, name):
         self.name = name
-        url = parse.urljoin(websitename, f"watch/{name}")
-
+        self.url = parse.urljoin(self.base_url, f"watch/{name}")
+        super().__init__(self.url)
     @property
     def info(self):
         return re.search(r".tv/watch/(?P<series>[^/]*)", self.url)
