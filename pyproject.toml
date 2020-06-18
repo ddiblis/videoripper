@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "video_ripper"
-version = "0.1.3"
+version = "0.1.4"
 description = "rips videos from select websites"
 authors = ["wafiq"]
 packages = [{ include = "anime_rip" }]
@@ -20,7 +20,7 @@ videoripper = 'anime_rip.cli:cli'
 
 [tool.commitizen]
 name = "cz_conventional_commits"
-version = "0.1.3"
+version = "0.1.4"
 version_files = [
     "pyproject.toml"
 ]
